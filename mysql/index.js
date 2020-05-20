@@ -1,4 +1,3 @@
-
 let conn;
 const mysql = require('mysql');
 const db = mysql.createConnection({
@@ -13,4 +12,4 @@ db.connect(() => {
 	conn = db;
 });
 
-module.exports = conn;
+module.exports = () => conn;

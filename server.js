@@ -1,12 +1,15 @@
 'use strict';
 require('dotenv').config();
 
-const mysql = require('./mysql');
 const express = require('express');
+const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const app = express();
 
 app
+	.use(bodyParser.urlencoded({ extended: true }))
+	.use(bodyParser.json())
+	.use(bodyParser.raw())
 	.get('/dialogs/:id', controllers.dialogGetOne)
 	.get('/dialogs', controllers.dialogGetMany)
 	.post('/dialogs', controllers.dialogCreate)
