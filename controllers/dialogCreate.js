@@ -3,7 +3,7 @@ const {
 	validate: validateError, 
 	model: modelError, 
 } = require('../errors');
-const { dialog: dialogModel } = require('../models');
+const { Dialog: DialogModel } = require('../models');
 const { dialog: dialogResponse } = require('../responses');
 
 module.exports = async (req, res) => {
@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
 	// query to db
 	try {
-		const item = await dialogModel.create(name);
+		const item = await DialogModel.create({ name });
 
 		res.json(dialogResponse(item));
 	}

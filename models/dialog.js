@@ -1,15 +1,10 @@
-const mysql = require('../mysql');
-
-const create = async (name = '') => {
-	const result = await mysql().query(`INSERT INTO dialogs (name) VALUES ('${name}');`);
-
-	return {
-		name,
-		created_at: '10:00',
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+	const Dialog = sequelize.define('Dialog', {
+		name: DataTypes.STRING
+	}, {});
+	Dialog.associate = function(models) {
+		// associations can be defined here
 	};
-};
-
-module.exports = {
-	// getOne,
-	create,
+	return Dialog;
 };

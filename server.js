@@ -14,6 +14,11 @@ app
 	.get('/dialogs', controllers.dialogGetMany)
 	.post('/dialogs', controllers.dialogCreate)
 	.patch('/dialogs/:id', controllers.dialogUpdate)
-	.delete('/dialogs/:id', controllers.dialogDelete);
+	.delete('/dialogs/:id', controllers.dialogDelete)
+	.post('/messages/', controllers.messageCreate)
+	.patch('/messages/:id', controllers.messageUpdate)
+	.delete('/messages/:id', controllers.messageDelete)
+	.get('/users/:id', controllers.userGetOne)
+	.get('/users/', controllers.userGetMany);
 
 app.listen(4444);

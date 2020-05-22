@@ -3,6 +3,11 @@ const dialogDelete = require('./dialogDelete.js');
 const dialogGetMany = require('./dialogGetMany.js');
 const dialogGetOne = require('./dialogGetOne.js');
 const dialogUpdate = require('./dialogUpdate.js');
+const messageCreate = require('./messageCreate.js');
+const messageUpdate = require('./messageUpdate.js');
+const messageDelete = require('./messageDelete.js');
+const userGetOne = require('./userGetOne.js');
+const userGetMany = require('./userGetMany.js');
 
 module.exports = {
 	dialogCreate,
@@ -10,4 +15,9 @@ module.exports = {
 	dialogGetMany,
 	dialogGetOne,
 	dialogUpdate,
+	messageCreate,
+	messageDelete,
+	messageUpdate,
+	userGetMany,
+	userGetOne,
 };
