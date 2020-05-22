@@ -1,7 +1,9 @@
 const dialog = require('./dialog.js');
-const user = require('./user.js');
+const userOne = require('./userOne.js');
+const userMany = require('./userMany.js');
 
 module.exports = {
 	dialog,
-	user,
+	userOne,
+	userMany,
 };
