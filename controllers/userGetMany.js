@@ -6,7 +6,9 @@ module.exports = async (req, res) => {
 	// query to db
 	try {
 		const items = await UserModel.findAll({
-			select: [ 'id', 'name', 'email' ],
+			attributes: {
+				exclude: [ 'password' ]
+			}
 		});
 
 		res.json(userManyResponse(items));
