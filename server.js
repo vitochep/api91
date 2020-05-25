@@ -1,9 +1,13 @@
 'use strict';
 require('dotenv').config();
 
+//подключение фрєймворка express из установленной библиотеки express
 const express = require('express');
+
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
+
+//создание сущности express
 const app = express();
 
 app
@@ -20,4 +24,6 @@ app
 	.get('/users/:id', controllers.userGetOne)
 	.get('/users/', controllers.userGetMany);
 
+
+// порт на котором висит всё приложение
 app.listen(4444);
