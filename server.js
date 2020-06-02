@@ -1,33 +1,40 @@
 'use strict';
 require('dotenv').config();
 
-//подключение фрєймворка express из установленной библиотеки express
 const express = require('express');
-
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
-
-//создание сущности express
 const app = express();
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const io = require('socket.io')(parseInt(process.env.SOCKET_PORT));
+const { auth } = require('./middlewares');
 
 app
 	.use(cors())
+	.use(cookieParser())
 	.use(bodyParser.urlencoded({ extended: true }))
 	.use(bodyParser.json())
 	.use(bodyParser.raw())
+	.post('/users/', controllers.userCreate)
+	.get('/login/', controllers.userLogin)
+	.put('/refresh/', controllers.tokensRefresh)
+	.use(auth)
 	.get('/dialogs/:id', controllers.dialogGetOne)
 	.get('/dialogs', controllers.dialogGetMany)
 	.post('/dialogs', controllers.dialogCreate)
 	.patch('/dialogs/:id', controllers.dialogUpdate)
 	.delete('/dialogs/:id', controllers.dialogDelete)
-	.get('/messages', controllers.messageGetMany)
-	.post('/messages/', controllers.messageCreate)
+	.post('/messages/', controllers.messageCreate(io))
 	.patch('/messages/:id', controllers.messageUpdate)
 	.delete('/messages/:id', controllers.messageDelete)
 	.get('/users/:id', controllers.userGetOne)
 	.get('/users/', controllers.userGetMany);
 
+app.listen(parseInt(process.env.HTTP_PORT));
 
-// порт на котором висит всё приложение
-app.listen(4444);
+io.on('connection', (socket) => {
+	setTimeout(async () => {
+		socket.on('messages', controllers.messageGetMany(socket));
+	}, 0);
+});
