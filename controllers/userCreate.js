@@ -30,8 +30,6 @@ module.exports = async (req, res) => {
 		const hash = crypto.createHmac('sha256', process.env.PASSWORD_KEY)
 			.update(password)
 			.digest('hex');
-		
-		console.log(hash)
 
 		const user = await UserModel.create({ 
 			name, 
