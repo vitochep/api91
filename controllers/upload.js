@@ -24,8 +24,6 @@ module.exports = async (req, res) => {
         }
     });
 
-    console.log(dialog)
-
     dialog.update({avatar:dialogAvatar + '.jpg'});
 
     res.json(dialogOneResponse(dialog));
